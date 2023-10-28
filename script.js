@@ -88,9 +88,18 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var passwordLength;
+var lowerChars;
+var upperChars;
+var numericChars;
+var specialChars;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-
+  passwordLength = prompt("Enter a password length between 8 and 128 characters");
+  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
+    alert("Please enter a number between 8 and 128");
+  }
 }
 
 // Function for getting a random element from an array
@@ -100,7 +109,7 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-
+  getPasswordOptions();
 }
 
 // Get references to the #generate element
