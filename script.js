@@ -102,10 +102,17 @@ function getPasswordOptions() {
   }
 
   lowerChars = confirm("Include lower case characters?");
+  console.log ("Lower Case = " + lowerChars);
   upperChars = confirm("Include upper case characters?");
+  console.log ("Upper Case = " + upperChars);
   numericChars = confirm("Include numbers?");
+  console.log ("Numbers = " + numericChars);
   specialChars = confirm("Include special characters?");
+  console.log ("Special = " + specialChars);
 
+  if (!lowerChars && !upperChars && !numericChars && !specialChars) {
+    alert("You must choose at least one password option.  Please try again");
+  }
 }
 
 // Function for getting a random element from an array
