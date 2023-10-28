@@ -97,33 +97,37 @@ var specialChars;   // variable to store whether special characters have been re
 // Function to prompt user for password options
 function getPasswordOptions() {
   passwordLength = prompt("Enter a password length between 8 and 128 characters");  // ask for desired length
+
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
     alert("You must enter a number between 8 and 128.  Please try again"); // if input value is too low, too high or not a number, flag error message
   }
 
-  lowerChars = confirm("Include lower case characters?");
+  lowerChars = confirm("Include lower case characters?"); // ask if lower case should be included
   console.log ("Lower Case = " + lowerChars);
-  upperChars = confirm("Include upper case characters?");
+  
+  upperChars = confirm("Include upper case characters?"); // ask if upper case should be included
   console.log ("Upper Case = " + upperChars);
-  numericChars = confirm("Include numbers?");
+  
+  numericChars = confirm("Include numbers?");             // ask if numbers should be included
   console.log ("Numbers = " + numericChars);
-  specialChars = confirm("Include special characters?");
+  
+  specialChars = confirm("Include special characters?");  // ask if special characters should be included
   console.log ("Special = " + specialChars);
 
   if (!lowerChars && !upperChars && !numericChars && !specialChars) {
-    alert("You must choose at least one password option.  Please try again");
+    alert("You must choose at least one password option.  Please try again"); // if no option was chosen, flag error message
   }
-}
+};
 
 // Function for getting a random element from an array
 function getRandom(arr) {
 
-}
+};
 
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions();
-}
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
