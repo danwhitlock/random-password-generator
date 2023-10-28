@@ -88,18 +88,24 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var passwordLength;
-var lowerChars;
-var upperChars;
-var numericChars;
-var specialChars;
+var passwordLength; // variable to store the chosen password length
+var lowerChars;     // variable to store whether lower case characters have been requested
+var upperChars;     // variable to store whether upper case characters have been requested
+var numericChars;   // variable to store whether numeric characters have been requested
+var specialChars;   // variable to store whether special characters have been requested
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  passwordLength = prompt("Enter a password length between 8 and 128 characters");
-  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
-    alert("Please enter a number between 8 and 128");
+  passwordLength = prompt("Enter a password length between 8 and 128 characters");  // ask for desired length
+  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
+    alert("You must enter a number between 8 and 128.  Please try again"); // if input value is too low, too high or not a number, flag error message
   }
+
+  lowerChars = confirm("Include lower case characters?");
+  upperChars = confirm("Include upper case characters?");
+  numericChars = confirm("Include numbers?");
+  specialChars = confirm("Include special characters?");
+
 }
 
 // Function for getting a random element from an array
