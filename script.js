@@ -116,8 +116,6 @@ var chosenChars = [];
 function getPasswordOptions() {
   passwordLength = prompt("Enter a password length between 8 and 128 characters");  // ask for desired length
 
-
-
   // If input value is too low, too high or not a number, flag error message and start again
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
     alert("You must enter a number between 8 and 128.  Please try again");
@@ -149,6 +147,7 @@ function getPasswordOptions() {
     // If no option was chosen, flag error message
     if (!lowerChars && !upperChars && !numericChars && !specialChars) {
       alert("You must choose at least one password option.  Please try again");
+      getPasswordOptions();
     }
   }
 };
@@ -167,8 +166,27 @@ function generatePassword() {
   // make password empty to begin with
   password = "";
   
-  // iterate through the password length, get a random character from the array of all chosenChars and add that to the password
-  for (var i = 0; i < passwordLength; i++) {
+  // make sure at least one character of each type chosen is included in the password
+  if (lowerChars) {
+    password += getRandom(lowerCasedCharacters);
+  }
+
+  if (upperChars) {
+    password += getRandom(upperCasedCharacters);
+  }
+
+  if (numericChars) {
+    password += getRandom(numericCharacters);
+  }
+
+  if (specialChars) {
+    password += getRandom(specialCharacters);
+  }
+
+  passwordRemainingLength = passwordLength - password.length;
+
+  // iterate through the remaining length of the password, get a random character from the array of all chosenChars and add that to the password
+  for (var i = 0; i < passwordRemainingLength; i++) {
     randomCharFromAllChosen = getRandom(chosenChars);
     password += randomCharFromAllChosen;
   }
