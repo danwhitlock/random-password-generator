@@ -99,16 +99,16 @@ var specialCharacters = [
   '.'
 ];
 
-// variable to store the chosen password length
+// Variable to store the chosen password length
 var passwordLength;       
 
-// variable to store whether each of the four character types have been requested
+// Variables to store whether each of the four options were chosen
 var lowerChars;            
 var upperChars;           
 var numericChars;         
 var specialChars;         
 
-// An array to hold a list of all characters from the options the user chose
+// Array to hold a combined list of all characters from the options the user chose
 var chosenChars = [];     
 
 
@@ -116,40 +116,40 @@ var chosenChars = [];
 function getPasswordOptions() {
   passwordLength = prompt("Enter a password length between 8 and 128 characters");  // ask for desired length
 
-  // If input value is too low, too high or not a number, flag error message
+
+
+  // If input value is too low, too high or not a number, flag error message and start again
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
-    alert("You must enter a number between 8 and 128.  Please try again"); 
-  }
+    alert("You must enter a number between 8 and 128.  Please try again");
+    generatePassword(); 
+  } else {
 
-  // Ask user which of the four character types they wish to include, and add those characters to the chosenChars array.  Using the ... (spread operator) makes sure that when added, they are all stored as single array rather than as separate arrays e.g. [a, B, 1, @] rather than [ [a], [B], [1], [@] ]
+    // Ask user which of the four character types they wish to include, and add those characters to the chosenChars array.  Using the ... (spread operator) makes sure that when added, they are all stored as a single array rather than as separate arrays e.g. [a, B, 1, @] rather than [ [a], [B], [1], [@] ]
 
-  lowerChars = confirm("Include lower case characters?"); 
-  console.log ("Lower Case = " + lowerChars);
-  if (lowerChars) {
-    chosenChars.push(...lowerCasedCharacters);    
-  }
+    lowerChars = confirm("Include lower case characters?"); 
+    if (lowerChars) {
+      chosenChars.push(...lowerCasedCharacters);    
+    }
+    
+    upperChars = confirm("Include upper case characters?");
+    if (upperChars) {
+      chosenChars.push(...upperCasedCharacters);
+    }
+
+    numericChars = confirm("Include numbers?");
+    if (numericChars) {
+      chosenChars.push(...numericCharacters);
+    }
+    
+    specialChars = confirm("Include special characters?");
+    if (specialChars) {
+      chosenChars.push(...specialCharacters);
+    }
   
-  upperChars = confirm("Include upper case characters?");
-  console.log ("Upper Case = " + upperChars);
-  if (upperChars) {
-    chosenChars.push(...upperCasedCharacters);
-  }
-
-  numericChars = confirm("Include numbers?");
-  console.log ("Numbers = " + numericChars);
-  if (numericChars) {
-    chosenChars.push(...numericCharacters);
-  }
-  
-  specialChars = confirm("Include special characters?");
-  console.log ("Special = " + specialChars);
-  if (specialChars) {
-    chosenChars.push(...specialCharacters);
-  }
- 
-   // If no option was chosen, flag error message
-  if (!lowerChars && !upperChars && !numericChars && !specialChars) {
-    alert("You must choose at least one password option.  Please try again");
+    // If no option was chosen, flag error message
+    if (!lowerChars && !upperChars && !numericChars && !specialChars) {
+      alert("You must choose at least one password option.  Please try again");
+    }
   }
 };
 
@@ -172,7 +172,8 @@ function generatePassword() {
     randomCharFromAllChosen = getRandom(chosenChars);
     password += randomCharFromAllChosen;
   }
-  // return the password outside of the loop, otherwise it'll stop after the first character
+
+  // return the password outside of the loop, otherwise it stops after the first character
   return password;
 };
 
