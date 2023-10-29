@@ -149,7 +149,7 @@ function getPasswordOptions() {
       chosenChars.push(...specialCharacters);
     }
   
-    // If no option was chosen, flag error message
+    // If no option was chosen, flag error message and start again
     if (!includeLowers && !includeUppers && !includeNumerics && !includeSpecials) {
       alert("You must choose at least one password option.  Please try again");
       getPasswordOptions();
@@ -188,7 +188,7 @@ function generatePassword() {
     password += getRandom(specialCharacters);
   }
 
-  // determine what the remaining length of the password should be
+  // determine the remaining length of the password after the initial characters have been added
   passwordRemainingLength = desiredPasswordLength - password.length;
 
   // iterate through the remaining length of the password, get a random character from the array of all chosenChars and add that to the password
