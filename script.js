@@ -100,13 +100,13 @@ var specialCharacters = [
 ];
 
 // Variable to store the chosen password length
-var passwordLength;       
+var desiredPasswordLength;       
 
 // Variables to store whether each of the four options were chosen
-var lowerChars;            
-var upperChars;           
-var numericChars;         
-var specialChars;         
+var includeLowers;            
+var includeUppers;           
+var includeNumerics;         
+var includeSpecials;         
 
 // Array to hold a combined list of all characters from the options the user chose
 var chosenChars = [];     
@@ -119,38 +119,38 @@ function getPasswordOptions() {
   chosenChars = [];
   
   // ask for and store desired password length
-  passwordLength = prompt("Enter a password length between 8 and 128 characters");  
+  desiredPasswordLength = prompt("Enter a password length between 8 and 128 characters");  
 
   // If input value is too low, too high or not a number, flag error message and start again
-  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
+  if (desiredPasswordLength < 8 || desiredPasswordLength > 128 || isNaN(desiredPasswordLength)) {        
     alert("You must enter a number between 8 and 128.  Please try again");
     generatePassword(); 
   } else {
 
     // Ask user which of the four character types they wish to include, and add those characters to the chosenChars array.  Using the ... (spread operator) makes sure that when added, they are all stored as a single array rather than as separate arrays e.g. [a, B, 1, @] rather than [ [a], [B], [1], [@] ]
 
-    lowerChars = confirm("Include lower case characters?"); 
-    if (lowerChars) {
+    includeLowers = confirm("Include lower case characters?"); 
+    if (includeLowers) {
       chosenChars.push(...lowerCasedCharacters);    
     }
     
-    upperChars = confirm("Include upper case characters?");
-    if (upperChars) {
+    includeUppers = confirm("Include upper case characters?");
+    if (includeUppers) {
       chosenChars.push(...upperCasedCharacters);
     }
 
-    numericChars = confirm("Include numbers?");
-    if (numericChars) {
+    includeNumerics = confirm("Include numbers?");
+    if (includeNumerics) {
       chosenChars.push(...numericCharacters);
     }
     
-    specialChars = confirm("Include special characters?");
-    if (specialChars) {
+    includeSpecials = confirm("Include special characters?");
+    if (includeSpecials) {
       chosenChars.push(...specialCharacters);
     }
   
     // If no option was chosen, flag error message
-    if (!lowerChars && !upperChars && !numericChars && !specialChars) {
+    if (!includeLowers && !includeUppers && !includeNumerics && !includeSpecials) {
       alert("You must choose at least one password option.  Please try again");
       getPasswordOptions();
     }
@@ -168,28 +168,28 @@ function getRandom(array) {
 function generatePassword() {
   getPasswordOptions();
 
-  // make password empty to begin with
+  // make sure password is empty to begin with
   password = "";
   
   // make sure at least one character of each type chosen is included in the password to begin with
-  if (lowerChars) {
+  if (includeLowers) {
     password += getRandom(lowerCasedCharacters);
   }
 
-  if (upperChars) {
+  if (includeUppers) {
     password += getRandom(upperCasedCharacters);
   }
 
-  if (numericChars) {
+  if (includeNumerics) {
     password += getRandom(numericCharacters);
   }
 
-  if (specialChars) {
+  if (includeSpecials) {
     password += getRandom(specialCharacters);
   }
 
   // determine what the remaining length of the password should be
-  passwordRemainingLength = passwordLength - password.length;
+  passwordRemainingLength = desiredPasswordLength - password.length;
 
   // iterate through the remaining length of the password, get a random character from the array of all chosenChars and add that to the password
   for (var i = 0; i < passwordRemainingLength; i++) {
