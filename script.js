@@ -88,11 +88,12 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var passwordLength; // variable to store the chosen password length
-var lowerChars;     // variable to store whether lower case characters have been requested
-var upperChars;     // variable to store whether upper case characters have been requested
-var numericChars;   // variable to store whether numeric characters have been requested
-var specialChars;   // variable to store whether special characters have been requested
+var passwordLength;       // variable to store the chosen password length
+var lowerChars;           // variable to store whether lower case characters have been requested
+var upperChars;           // variable to store whether upper case characters have been requested
+var numericChars;         // variable to store whether numeric characters have been requested
+var specialChars;         // variable to store whether special characters have been requested
+var chosenChars = [];     // array to store every possible character the password can contain, based upon the users choices
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -104,15 +105,31 @@ function getPasswordOptions() {
 
   lowerChars = confirm("Include lower case characters?"); // ask if lower case should be included
   console.log ("Lower Case = " + lowerChars);
+  if (lowerChars) {
+    chosenChars.push(...lowerCasedCharacters);  // if user chose this option, add all possible characters from that array to chosenChars 
+    
+    // using the ... (spread operator) makes sure that when added, they are all merged into a single array, rather than being added as separate arrays
+  }
   
   upperChars = confirm("Include upper case characters?"); // ask if upper case should be included
   console.log ("Upper Case = " + upperChars);
-  
-  numericChars = confirm("Include numbers?");             // ask if numbers should be included
+  if (upperChars) {
+    chosenChars.push(...upperCasedCharacters);  // if user chose this option, add all possible characters from that array to chosenChars 
+  }
+
+  numericChars = confirm("Include numbers?"); // ask if numbers should be included
   console.log ("Numbers = " + numericChars);
+  if (numericChars) {
+    chosenChars.push(...numericCharacters);  // if user chose this option, add all possible characters from that array to chosenChars 
+  }
   
   specialChars = confirm("Include special characters?");  // ask if special characters should be included
   console.log ("Special = " + specialChars);
+  if (specialChars) {
+    chosenChars.push(...specialCharacters); // if user chose this option, add all possible characters from that array to chosenChars 
+  }
+
+  console.log(chosenChars);
 
   if (!lowerChars && !upperChars && !numericChars && !specialChars) {
     alert("You must choose at least one password option.  Please try again"); // if no option was chosen, flag error message
@@ -128,8 +145,6 @@ function getRandom(array) {
 function generatePassword() {
   getPasswordOptions();
 
-
-  
 };
 
 // Get references to the #generate element
