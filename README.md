@@ -14,7 +14,7 @@ I have used a combination of functions, loops, methods and if/if else statements
 
 A screenshot of the deployed app - 
 
-![password generator screenshot](./password-generator.png))
+![password generator screenshot](./password-generator.png)
 
 Link to app - 
 
