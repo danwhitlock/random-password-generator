@@ -114,7 +114,12 @@ var chosenChars = [];
 
 // Function to prompt user for password options and store chosen options in a new variable
 function getPasswordOptions() {
-  passwordLength = prompt("Enter a password length between 8 and 128 characters");  // ask for desired length
+  
+  // make sure the chosenChars array is empty to start with.  This ensures that if a user creates multiple passwords in a row with different options, the changes in options are recognised (it'll re-use the 'old' array if not) 
+  chosenChars = [];
+  
+  // ask for and store desired password length
+  passwordLength = prompt("Enter a password length between 8 and 128 characters");  
 
   // If input value is too low, too high or not a number, flag error message and start again
   if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {        
@@ -166,7 +171,7 @@ function generatePassword() {
   // make password empty to begin with
   password = "";
   
-  // make sure at least one character of each type chosen is included in the password
+  // make sure at least one character of each type chosen is included in the password to begin with
   if (lowerChars) {
     password += getRandom(lowerCasedCharacters);
   }
@@ -183,6 +188,7 @@ function generatePassword() {
     password += getRandom(specialCharacters);
   }
 
+  // determine what the remaining length of the password should be
   passwordRemainingLength = passwordLength - password.length;
 
   // iterate through the remaining length of the password, get a random character from the array of all chosenChars and add that to the password
